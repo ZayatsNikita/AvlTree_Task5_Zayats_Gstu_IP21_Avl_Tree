@@ -1,13 +1,15 @@
 ﻿using System;
 
-namespace AvlTree
+namespace BalancingTrees
 {
-    class Node<T> where T : IComparable
+    public class Node<T> where T : IComparable
     {
-        public int depd;
-        public Node<T> Left { get; protected internal set; }
-        public Node<T> Right { get; protected internal set; }
-        public T Data { get; protected internal set; }
+        protected internal Node<T> Right;
+
+        protected internal Node<T> Left;
+
+        protected internal int Count{get;set;}=1;
+        public T Data { get;  set; }
         public Node(T data)
         {
             if(data==null)
