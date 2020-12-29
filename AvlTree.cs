@@ -18,41 +18,32 @@ namespace BalancingTrees
         Node<T> root;
         public void Add(T data)
         {
-            Node<T> newItem = new Node<T>(data);
-            if (root == null)
-            {
-                root = newItem;
-            }
-            else
-            {
-                root = AddNode(root, newItem);
-            }
+            root = AddNode(root, data);
+ 
         }
-        private Node<T> AddNode(Node<T> current, Node<T> node)
+        private Node<T> AddNode(Node<T> current, T data)
         {
             if (current == null)
             {
-                current = node;
-                return current;
+                return new Node<T>(data);
             }
             int compareRes;
-            compareRes = node.Data.CompareTo(current.Data);
+            compareRes = data.CompareTo(current.Data);
             if (compareRes == 0)
             {
-                current.Count++;
+                current.AddData(data);
             }
             else
             {
                 if (compareRes < 0)
                 {
-                    current.Left = AddNode(current.Left, node);
-                    
+                    current.Left = AddNode(current.Left, data);
                 }
                 else
                 {
                     if (compareRes > 0)
                     {
-                        current.Right = AddNode(current.Right, node);
+                        current.Right = AddNode(current.Right, data);
                     }
                 }
                 current = BalanceTree(current);
@@ -86,15 +77,21 @@ namespace BalancingTrees
             }
             return current;
         }
-        public void Delete(T target)
+        public void DeleteElementWithSameComparedParameters(T target)
         {
-           root = Delete(root, target);
+           root = DeleteElementWithSameComparedParameters(root, target);
         }
-        private Node<T> Delete(Node<T> current, T target)
+        public void DeleteEqualElement(T target)
+        {
+            root = DeleteEqualElement(root, target);
+        }
+
+
+        private Node<T> DeleteEqualElement(Node<T> current, T target) 
         {
             Node<T> parent;
             if (current == null)
-            { 
+            {
                 return null;
             }
             else
@@ -102,7 +99,7 @@ namespace BalancingTrees
                 int compareRes = target.CompareTo(current.Data);
                 if (compareRes < 0)
                 {
-                    current.Left = Delete(current.Left, target);
+                    current.Left = DeleteElementWithSameComparedParameters(current.Left, target);
                     if (DifferenceInHeightOfLeftAndRightSubTree(current) == -2)//here
                     {
                         if (DifferenceInHeightOfLeftAndRightSubTree(current.Right) <= 0)
@@ -117,7 +114,7 @@ namespace BalancingTrees
                 }
                 else if (compareRes > 0)
                 {
-                    current.Right = Delete(current.Right, target);
+                    current.Right = DeleteElementWithSameComparedParameters(current.Right, target);
                     if (DifferenceInHeightOfLeftAndRightSubTree(current) == 2)
                     {
                         if (DifferenceInHeightOfLeftAndRightSubTree(current.Left) >= 0)
@@ -132,9 +129,89 @@ namespace BalancingTrees
                 }
                 else
                 {
-                    if (current.Count> 1)
+                    if (current.ContainIt(target))
                     {
-                        current.Count--;
+                        if (current.Length > 1 || current.CountOfSpecificElement(target)>1)
+                        {
+                            current.RemoveData(target); //Если он единственный
+                            return current;
+                        }
+                        if (current.Right != null)
+                        {
+                            parent = current.Right;
+                            while (parent.Left != null)
+                            {
+                                parent = parent.Left;
+                            }
+                            current.DataList = parent.DataList;
+                            current.Right = DeleteElementWithSameComparedParameters(current.Right, parent.Data);
+                            if (DifferenceInHeightOfLeftAndRightSubTree(current) == 2)
+                            {
+                                if (DifferenceInHeightOfLeftAndRightSubTree(current.Left) >= 0)
+                                {
+                                    current = RotateLL(current);
+                                }
+                                else { current = RotateLR(current); }
+                            }
+                        }
+                        else
+                        {
+                            return current.Left;
+                        }
+                    }
+                    else
+                    {
+                        return current;
+                    }
+                }
+            }
+            return current;
+        }
+        private Node<T> DeleteElementWithSameComparedParameters(Node<T> current, T target)
+        {
+            Node<T> parent;
+            if (current == null)
+            { 
+                return null;
+            }
+            else
+            {
+                int compareRes = target.CompareTo(current.Data);
+                if (compareRes < 0)
+                {
+                    current.Left = DeleteElementWithSameComparedParameters(current.Left, target);
+                    if (DifferenceInHeightOfLeftAndRightSubTree(current) == -2)//here
+                    {
+                        if (DifferenceInHeightOfLeftAndRightSubTree(current.Right) <= 0)
+                        {
+                            current = RotateRR(current);
+                        }
+                        else
+                        {
+                            current = RotateRL(current);
+                        }
+                    }
+                }
+                else if (compareRes > 0)
+                {
+                    current.Right = DeleteElementWithSameComparedParameters(current.Right, target);
+                    if (DifferenceInHeightOfLeftAndRightSubTree(current) == 2)
+                    {
+                        if (DifferenceInHeightOfLeftAndRightSubTree(current.Left) >= 0)
+                        {
+                            current = RotateLL(current);
+                        }
+                        else
+                        {
+                            current = RotateLR(current);
+                        }
+                    }
+                }
+                else
+                {
+                    if (current.Length > 1 || current.MaxCount>1)
+                    {
+                        current.RemoveFirstItem();
                         return current;
                     }
                     if (current.Right != null)
@@ -144,9 +221,9 @@ namespace BalancingTrees
                         {
                             parent = parent.Left;
                         }
-                        current.Data = parent.Data;
-                        current.Right = Delete(current.Right, parent.Data);
-                        if (DifferenceInHeightOfLeftAndRightSubTree(current) == 2)//rebalancing
+                        current.DataList = parent.DataList;
+                        current.Right = DeleteElementWithSameComparedParameters(current.Right, parent.Data);
+                        if (DifferenceInHeightOfLeftAndRightSubTree(current) == 2)
                         {
                             if (DifferenceInHeightOfLeftAndRightSubTree(current.Left) >= 0)
                             {
@@ -206,11 +283,10 @@ namespace BalancingTrees
                 {
                     stringRepresentationOfTree.Append("   ");
                 }
-                stringRepresentationOfTree.Append($"{current.Data}" + (current.Count > 1 ? $"duplicated {current.Count} times" : null));
+                stringRepresentationOfTree.Append($"{current.Data}\n"/* + (current.Count > 1 ? $"duplicated {current.Count} times" : null)*/);
                 ConvertTreeToString(current.Right, level + 1);
             }
         }
-
         private int GetHeight(Node<T> current)
         {
             int height = 0;
@@ -313,7 +389,7 @@ namespace BalancingTrees
             return dataOfNodes.GetEnumerator();
         }
 
-        List<T> dataOfNodes;
+        List<T> dataOfNodes=new List<T>();
 
         public void GetData(Node<T> current)
         {
