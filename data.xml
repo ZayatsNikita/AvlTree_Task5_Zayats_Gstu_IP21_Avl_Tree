@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<NodeOfStudentInformation>
+  <ArrayOfElementOfStudentInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ElementOfStudentInformation>
+      <data>
+        <StudenName>masha</StudenName>
+        <TestName>bel</TestName>
+        <DateOfPassingTheThest>2021-01-03T03:26:26.9375063+03:00</DateOfPassingTheThest>
+        <MarkforTest>10</MarkforTest>
+      </data>
+      <сount>1</сount>
+    </ElementOfStudentInformation>
+    <ElementOfStudentInformation>
+      <data>
+        <StudenName>dima</StudenName>
+        <TestName>rus</TestName>
+        <DateOfPassingTheThest>2021-01-03T03:26:26.9597225+03:00</DateOfPassingTheThest>
+        <MarkforTest>10</MarkforTest>
+      </data>
+      <сount>1</сount>
+    </ElementOfStudentInformation>
+  </ArrayOfElementOfStudentInformation>
+</NodeOfStudentInformation>
