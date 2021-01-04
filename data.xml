@@ -1,23 +1,51 @@
 <?xml version="1.0"?>
-<NodeOfStudentInformation>
-  <ArrayOfElementOfStudentInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <ElementOfStudentInformation>
-      <data>
-        <StudenName>masha</StudenName>
-        <TestName>bel</TestName>
-        <DateOfPassingTheThest>2021-01-03T03:26:26.9375063+03:00</DateOfPassingTheThest>
-        <MarkforTest>10</MarkforTest>
-      </data>
-      <сount>1</сount>
-    </ElementOfStudentInformation>
-    <ElementOfStudentInformation>
-      <data>
-        <StudenName>dima</StudenName>
-        <TestName>rus</TestName>
-        <DateOfPassingTheThest>2021-01-03T03:26:26.9597225+03:00</DateOfPassingTheThest>
-        <MarkforTest>10</MarkforTest>
-      </data>
-      <сount>1</сount>
-    </ElementOfStudentInformation>
-  </ArrayOfElementOfStudentInformation>
-</NodeOfStudentInformation>
+<AvlTreeOfStudentInformation>
+  <NodeOfStudentInformation>
+    <ArrayOfElementOfStudentInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <ElementOfStudentInformation>
+        <data>
+          <StudentName>lera</StudentName>
+          <TestName>obj</TestName>
+          <DateOfPassingTheThest>2021-01-03T22:34:52.2892543+03:00</DateOfPassingTheThest>
+          <MarkforTest>3</MarkforTest>
+        </data>
+        <сount>1</сount>
+      </ElementOfStudentInformation>
+    </ArrayOfElementOfStudentInformation>
+  </NodeOfStudentInformation>
+  <NodeOfStudentInformation>
+    <ArrayOfElementOfStudentInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <ElementOfStudentInformation>
+        <data>
+          <StudentName>Roma</StudentName>
+          <TestName>MMA</TestName>
+          <DateOfPassingTheThest>2021-01-03T22:34:52.2892544+03:00</DateOfPassingTheThest>
+          <MarkforTest>6</MarkforTest>
+        </data>
+        <сount>1</сount>
+      </ElementOfStudentInformation>
+    </ArrayOfElementOfStudentInformation>
+  </NodeOfStudentInformation>
+  <NodeOfStudentInformation>
+    <ArrayOfElementOfStudentInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <ElementOfStudentInformation>
+        <data>
+          <StudentName>kiril</StudentName>
+          <TestName>ximiya</TestName>
+          <DateOfPassingTheThest>2021-01-03T22:34:52.2890483+03:00</DateOfPassingTheThest>
+          <MarkforTest>10</MarkforTest>
+        </data>
+        <сount>1</сount>
+      </ElementOfStudentInformation>
+      <ElementOfStudentInformation>
+        <data>
+          <StudentName>masha</StudentName>
+          <TestName>bel</TestName>
+          <DateOfPassingTheThest>2021-01-03T22:34:52.2892536+03:00</DateOfPassingTheThest>
+          <MarkforTest>10</MarkforTest>
+        </data>
+        <сount>1</сount>
+      </ElementOfStudentInformation>
+    </ArrayOfElementOfStudentInformation>
+  </NodeOfStudentInformation>
+</AvlTreeOfStudentInformation>
