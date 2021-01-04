@@ -12,7 +12,9 @@ namespace BalancingTrees
         public AvlTree()
         {
             serializer = new XmlSerializer(typeof(Node<T>));
+            Count = 0;
         }
+        private int Count { get; set; }
 
         public Node<T> Root { get; private set; }
         public void Add(T data)
@@ -26,6 +28,7 @@ namespace BalancingTrees
         private void Add(Node<T> node)
         {
             Root = AddNewNode(Root, node);
+            Count++;
         }
         private Node<T> AddNewNode(Node<T> current, Node<T> nodeWithData)
         {
@@ -54,6 +57,7 @@ namespace BalancingTrees
         {
             if (current == null)
             {
+                Count++;
                 return new Node<T>(data);
             }
             int compareRes;
@@ -161,7 +165,11 @@ namespace BalancingTrees
                         }
                         if (current.Right != null)
                         {
-                            step = 0;
+                            if (step == 1)
+                            {
+                                step = 0;
+                                Count--;
+                            }
                             parentNode = current.Right;
                             while (parentNode.Left != null)
                             {
@@ -264,6 +272,10 @@ namespace BalancingTrees
         }
         public void ReadXml(XmlReader reader)
         {
+            if (reader == null)
+            {
+                throw new NullReferenceException();
+            }
             try
             {
                 Node<T> node=null;
@@ -287,6 +299,10 @@ namespace BalancingTrees
 
         public void WriteXml(XmlWriter writer)
         {
+            if(writer==null)
+            {
+                throw new NullReferenceException();
+            }
             GetNode(Root, (current)=> { serializer.Serialize(writer, current); });
         }
         
@@ -294,6 +310,10 @@ namespace BalancingTrees
         {
             get
             {
+                if(index<0 || index > Count)
+                {
+                    throw new ArgumentException();
+                }
                 List<T> res = null;
                 int count = 0;
                 GetNode(Root, (current) =>

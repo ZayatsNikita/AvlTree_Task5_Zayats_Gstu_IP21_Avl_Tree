@@ -86,7 +86,6 @@ namespace BalancingTrees
         public Node<T> Left { get; protected internal set; }
         protected internal int MaxCount{ get => DataList.Max(x => x.сount); }
         
-
         public XmlSchema GetSchema() => null;
 
         public void ReadXml(XmlReader reader)
@@ -106,6 +105,9 @@ namespace BalancingTrees
 
         public T Data { get => DataList[0].data; }
 
+        /// <summary>
+        /// Uses for solving the collision problem.
+        /// </summary>
         protected internal List<Element<T>> DataList { get; set; }
 
         public Node(T data)
