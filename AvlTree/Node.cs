@@ -90,7 +90,7 @@ namespace BalancingTrees
 
         public void ReadXml(XmlReader reader)
         {
-                if (reader.ReadToFollowing("ArrayOfElementOfStudentInformation"))
+                if (reader.ReadToFollowing("ArrayOfElementOf"+typeof(T).Name))
                 {
                     DataList = (List<Element<T>>)_serializerForList.Deserialize(reader);
                 }

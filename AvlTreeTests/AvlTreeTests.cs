@@ -201,6 +201,36 @@ namespace AvlTreeTests
             Assert.IsTrue(actual);
 
         }
+
+        [Test]
+        public void XmlSerealizationTest_SerealieTreeWithData_GetEqualTreeWithDesirializ2e()
+        {
+
+            AvlTree<string> tree = new AvlTree<string>();
+            tree.Add("паап");
+            tree.Add("мама");
+            tree.Add("я");
+            tree.Add("весёлая");
+            tree.Add("семя");
+           
+
+            XmlSerializer xmlSerializer = new XmlSerializer(tree.GetType());
+
+            using (FileStream fileStream = new FileStream(@"..\..\..\TestProg.xml", FileMode.OpenOrCreate))
+            {
+                xmlSerializer.Serialize(fileStream, tree);
+            }
+            AvlTree<string> res = null;
+            using (FileStream fileStream = new FileStream(@"..\..\..\TestProg.xml", FileMode.Open))
+            {
+                res = (AvlTree<string>)xmlSerializer.Deserialize(fileStream);
+            }
+
+            bool actual = AreEqual(res[0], tree[0]) && AreEqual(res[1], tree[1]) && AreEqual(res[2], tree[2]);
+            actual = actual && AreEqual(res[3], tree[3]) && AreEqual(res[4], tree[4]);
+
+            Assert.IsTrue(actual);
+        }
         [Test]
         public void AddTest_NullValue_NullRefernceEceptionThrown()
         {
