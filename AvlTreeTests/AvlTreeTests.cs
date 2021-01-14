@@ -184,7 +184,7 @@ namespace AvlTreeTests
 
             XmlSerializer xmlSerializer = new XmlSerializer(tree.GetType());
 
-            using (FileStream fileStream = new FileStream(@"..\..\..\TestProg.xml", FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream(@"..\..\..\TestProg.xml", FileMode.Truncate))
             {
                xmlSerializer.Serialize(fileStream,tree);
             }
@@ -216,7 +216,7 @@ namespace AvlTreeTests
 
             XmlSerializer xmlSerializer = new XmlSerializer(tree.GetType());
 
-            using (FileStream fileStream = new FileStream(@"..\..\..\TestProg.xml", FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream(@"..\..\..\TestProg.xml", FileMode.Truncate))
             {
                 xmlSerializer.Serialize(fileStream, tree);
             }
